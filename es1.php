@@ -61,22 +61,40 @@
 
 	];
 
+	//Prima parte di tabella con thead
+	echo '
+	<table class="table"> 
+			<thead>
+    			<tr>
+      				<th scope="col">#</th>
+      				<th scope="col">Name</th>
+      				<th scope="col">Description</th>
+      				<th scope="col">Parking</th>
+	  				<th scope="col">Vote</th>
+	  				<th scope="col">Distance to center</th>
+    			</tr>
+  			</thead>
+		<tbody>';
+
 	//Ciclo sull'array hotels prendendo i seguenti valori
 	foreach ($hotels as $key => $hotel) {
 		echo " 
-		<table class='table'> 
-			<tbody>
-				<tr>
-		  			<th scope='row'>$key</th>
-		  			<td>$hotel[name]</td>
-		  			<td>$hotel[description]</td>
-		  			<td>$hotel[parking]</td>
-					<td>$hotel[vote]</td>
-					<td>$hotel[distance_to_center]</td>
-				</tr>
-	  		</tbody>
-		</table>";
+			<tr>
+				<th scope='row'>$key</th>
+	  			<td>$hotel[name]</td>
+	  			<td>$hotel[description]</td>
+	  			<td>$hotel[parking]</td>
+				<td>$hotel[vote]</td>
+				<td>$hotel[distance_to_center]</td>
+			</tr>
+	  		";
 	}
+
+	//Seconda parte di tabella con chiusura del body e della table
+
+	echo "
+		</tbody>
+	</table>";
 
 	?>
 
