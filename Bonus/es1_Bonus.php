@@ -12,8 +12,8 @@
 <body>
 
 	<form>
-		<label for="parcheggio">Disponibilit&agrave; parcheggio? </label>
-		<input type="text" name="parcheggio">
+		<label for="parcheggio">Hotel con il parcheggio? </label>
+		<input type="checkbox" name="parcheggio">
 		<br>
 		<label for="hotel">Voto Hotel: </label>
 		<input type="text" name="hotel">
@@ -68,33 +68,48 @@
 
 	];
 
-	$parcheggio = $_GET['parcheggio'];
+	$parcheggio = isset($_GET['parcheggio']);
 	$voto = $_GET['hotel'];
 
-	if ($parcheggio === "si" || 'SI' || 'Si') {
-		foreach ($hotels as $hotel) {
-			if ($hotel['parking'] === true) {
-				echo "$hotel[name]";
-			}
-		}
-	}
+	//Prima parte di tabella con thead
+	echo '
+	<table class="table"> 
+			<thead>
+    			<tr>
+      				<th scope="col">#</th>
+      				<th scope="col">Name</th>
+      				<th scope="col">Description</th>
+      				<th scope="col">Parking</th>
+	  				<th scope="col">Vote</th>
+	  				<th scope="col">Distance to center</th>
+    			</tr>
+  			</thead>
+		<tbody>';
 
 	//Ciclo sull'array hotels prendendo i seguenti valori
-	// foreach ($hotels as $key => $hotel) {
-	// 	echo " 
-	// 	<table class='table'> 
-	// 		<tbody>
-	// 			<tr>
-	// 	  			<th scope='row'>$key</th>
-	// 	  			<td>$hotel[name]</td>
-	// 	  			<td>$hotel[description]</td>
-	// 	  			<td>$hotel[parking]</td>
-	// 				<td>$hotel[vote]</td>
-	// 				<td>$hotel[distance_to_center]</td>
-	// 			</tr>
-	//   		</tbody>
-	// 	</table>";
-	// }
+	foreach ($hotels as $key => $hotel) {
+
+		//Mostra solo gli hotel che hanno disponibilita' di parcheggio
+		if ($parcheggio && !$hotel['parking']) {
+			continue;
+		}
+		echo " 
+			<tr>
+				<th scope='row'>$key</th>
+	  			<td>$hotel[name]</td>
+	  			<td>$hotel[description]</td>
+	  			<td>$hotel[parking]</td>
+				<td>$hotel[vote]</td>
+				<td>$hotel[distance_to_center]</td>
+			</tr>
+	  		";
+	}
+
+	//Seconda parte di tabella con chiusura del body e della table
+
+	echo "
+		</tbody>
+	</table>";
 
 	?>
 
