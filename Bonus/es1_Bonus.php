@@ -16,9 +16,9 @@
 		<input type="checkbox" name="parcheggio">
 		<br>
 		<label for="hotel">Voto Hotel: </label>
-		<input type="text" name="hotel">
+		<input type="text" name="hotel" id="hotel">
 		<br>
-		<input type="submit" value="Invia">
+		<input type="submit" value="Cerca">
 	</form>
 
 	<?php
@@ -91,6 +91,9 @@
 
 		//Mostra solo gli hotel che hanno disponibilita' di parcheggio
 		if ($parcheggio && !$hotel['parking']) {
+			continue;
+		}
+		if ($voto > $hotel['vote']) { //PERCHE' FUNZIONA SOLO CON IL > OPPURE <    ????????????????????????
 			continue;
 		}
 		echo " 
